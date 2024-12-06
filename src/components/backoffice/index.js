@@ -1,2 +1,5 @@
 export { default as Navbar } from './Navbar.jsx'
 export { default as Sidebar } from './Sidebar.jsx'
+export { default as Heading } from './Heading.jsx'
+export { default as LargeCards } from './LargeCards.jsx'
+export { default as SmallCards } from './SmallCards.jsx'
