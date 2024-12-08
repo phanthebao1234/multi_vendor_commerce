@@ -30,7 +30,7 @@ export default function SmallCards() {
     },
   ];
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5 gap-4 py-8">
+    <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5 w-auto gap-4 py-8">
       {orderStatus.map((item, index) => {
         return <SmallCard key={index} data={item}/>;
       })}
