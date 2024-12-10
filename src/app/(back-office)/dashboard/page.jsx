@@ -1,4 +1,4 @@
-import { DashboardCharts, Heading, LargeCards, SmallCards } from "@/components/backoffice";
+import { CustomDataTable, DashboardCharts, Heading, LargeCards, SmallCards } from "@/components/backoffice";
 
 export default function page() {
     return (
@@ -11,6 +11,7 @@ export default function page() {
             {/* Charts */}
             <DashboardCharts />
             {/* Recent Orders Table */}
+            <CustomDataTable />
         </div>
     )
 };
