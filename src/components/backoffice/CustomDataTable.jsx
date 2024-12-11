@@ -37,18 +37,19 @@ export default function CustomDataTable() {
     // cập nhật trạng thái thành giá trị ngược lại của nó (true <=> false)
     setIsAllSelected(!isAllSelected);
   };
-  const arr = [1,2,3,4,5]
-  const PAGE_SIZE = 10
-  const numberOfPages = Math.ceil(data.length / PAGE_SIZE)
-  console.log(numberOfPages);
-  
-  const [currentPage, setCurrentPage] = useState(1)
-  const startIndex = (currentPage - 1) * PAGE_SIZE
-  const endIndex = startIndex + PAGE_SIZE
-  const currentlyDisplayedData = data.slice(startIndex, endIndex) 
+  const arr = [1, 2, 3, 4, 5];
+  const PAGE_SIZE = 10;
+  const totalPages = Math.ceil(data.length / PAGE_SIZE);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const startIndex = (currentPage - 1) * PAGE_SIZE;
+  const endIndex = startIndex + PAGE_SIZE;
+  const currentlyDisplayedData = data.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
-    setCurrentPage(page + 1)
-  }
+    setCurrentPage(page + 1);
+  };
+  const itemStartIndex = startIndex + 1;
+  const itemEndIndex = Math.min(endIndex, data.length);
   return (
     <div className="">
       <h2 className="text-xl font-bold mb-4">Recent Order</h2>
@@ -143,72 +144,49 @@ export default function CustomDataTable() {
             className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4"
             aria-label="Table navigation"
           >
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
+            <span className="text-xl font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
               Showing{" "}
               <span className="font-semibold text-gray-50 dark:text-white">
-                1-10
+                {`${itemStartIndex} -  ${itemEndIndex}`}
               </span>{" "}
               of{" "}
               <span className="font-semibold text-gray-50 dark:text-white">
-                1000
+                {data.length}
               </span>
             </span>
-            <ul className="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+            <ul className="inline-flex -space-x-px rtl:space-x-reverse text-sm h-10">
               <li>
                 <button
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage == 1}
-                  className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  className="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
                   Previous
                 </button>
               </li>
-              <li>
-                <a
-                  href="#"
-                  className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  1
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  2
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  aria-current="page"
-                  className="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                >
-                  3
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  4
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  5
-                </a>
-              </li>
+              {Array.from({ length: totalPages }, (item, index) => {
+                return (
+                  <li key={index}>
+                    <button
+                      
+                      onClick={() => setCurrentPage(index + 1)}
+                      disabled={currentPage == index + 1}
+                      className={
+                        currentPage == index + 1
+                          ? "flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+                          : "flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                      }
+                    >
+                      {index + 1}
+                    </button>
+                  </li>
+                );
+              })}
               <li>
                 <button
-                  onClick={()=> handlePageChange(currentPage)}
-                  disabled={currentPage == numberOfPages}
-                  className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  onClick={() => handlePageChange(currentPage)}
+                  disabled={currentPage == totalPages}
+                  className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
                   Next
                 </button>
