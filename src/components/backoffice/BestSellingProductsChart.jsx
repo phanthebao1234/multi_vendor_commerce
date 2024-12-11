@@ -7,7 +7,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function BestSellingProductsChart() {
   const data = {
-    labels: ["Cabbage", "Watermelon0", "Broccoli", "Maize"],
+    labels: ["Cabbage", "Watermelon", "Broccoli", "Maize"],
     datasets: [
       {
         label: "# of Votes",
@@ -29,10 +29,17 @@ export default function BestSellingProductsChart() {
     ],
   };
   return (
-    <div className="bg-slate-700 rounded-lg p-8">
-      <h2 className="text-xl font-bold mb-4">Best Selling Products</h2>
+    <div className="dark:bg-slate-700 bg-slate-50 rounded-lg p-8 shadow-xl">
+      <h2 className="text-xl font-bold mb-4 dark:text-slate-50 text-slate-800">
+        Best Selling Products
+      </h2>
       <div className="p-4">
-        <Pie data={data} />
+        <Pie
+          data={data}
+          width={400}
+          height={400}
+          options={{ maintainAspectRatio: false }}
+        />
       </div>
     </div>
   );

@@ -37,7 +37,6 @@ export default function CustomDataTable() {
     // cập nhật trạng thái thành giá trị ngược lại của nó (true <=> false)
     setIsAllSelected(!isAllSelected);
   };
-  const arr = [1, 2, 3, 4, 5];
   const PAGE_SIZE = 10;
   const totalPages = Math.ceil(data.length / PAGE_SIZE);
 
@@ -51,13 +50,13 @@ export default function CustomDataTable() {
   const itemStartIndex = startIndex + 1;
   const itemEndIndex = Math.min(endIndex, data.length);
   return (
-    <div className="">
-      <h2 className="text-xl font-bold mb-4">Recent Order</h2>
+    <div className="p-8 shadow-xl sm:rounded-lg mt-4 dark:text-slate-50 text-slate-800 bg-slate-50 dark:bg-slate-700">
+      <h2 className="text-xl font-bold mb-4 ">Recent Order</h2>
       {/* table */}
-      <div className="p-8">
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-2">
+      <div className="">
+        <div className="relative overflow-x-auto p-2">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="p-4">
                   <div className="flex items-center">
@@ -146,11 +145,11 @@ export default function CustomDataTable() {
           >
             <span className="text-xl font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
               Showing{" "}
-              <span className="font-semibold text-gray-50 dark:text-white">
+              <span className="font-semibold bg-slate-50 dark:bg-slate-700">
                 {`${itemStartIndex} -  ${itemEndIndex}`}
               </span>{" "}
               of{" "}
-              <span className="font-semibold text-gray-50 dark:text-white">
+              <span className="font-semibold bg-slate-50 dark:bg-slate-700">
                 {data.length}
               </span>
             </span>
@@ -173,7 +172,7 @@ export default function CustomDataTable() {
                       disabled={currentPage == index + 1}
                       className={
                         currentPage == index + 1
-                          ? "flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+                          ? "flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-slate-400 dark:bg-slate-300 dark:text-slate-800 dark:hover:bg-gray-300"
                           : "flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                       }
                     >

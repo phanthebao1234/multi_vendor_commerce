@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import faker from 'faker';
+import faker from "faker";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,9 +10,9 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
+} from "chart.js";
 
-import { Line } from 'react-chartjs-2';
+import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -28,15 +28,15 @@ const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'top',
+      position: "top",
     },
     title: {
       display: false,
-      text: 'Chart.js Line Chart',
+      text: "Chart.js Line Chart",
     },
   },
 };
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
 export default function WeeklySalesChart() {
   const tabs = [
@@ -47,13 +47,15 @@ export default function WeeklySalesChart() {
         labels,
         datasets: [
           {
-            label: 'Sales',
-            data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-            borderColor: 'rgb(0, 137, 132)',
-            backgroundColor: 'rgba(0, 137, 132, 0.5)',
+            label: "Sales",
+            data: labels.map(() =>
+              faker.datatype.number({ min: -1000, max: 1000 })
+            ),
+            borderColor: "rgb(0, 137, 132)",
+            backgroundColor: "rgba(0, 137, 132, 0.5)",
           },
         ],
-      }
+      },
     },
     {
       title: "Orders",
@@ -62,19 +64,23 @@ export default function WeeklySalesChart() {
         labels,
         datasets: [
           {
-            label: 'Orders',
-            data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+            label: "Orders",
+            data: labels.map(() =>
+              faker.datatype.number({ min: -1000, max: 1000 })
+            ),
+            borderColor: "rgb(53, 162, 235)",
+            backgroundColor: "rgba(53, 162, 235, 0.5)",
           },
         ],
-      }
+      },
     },
   ];
   const [chartTobDisplay, setChartTobDisplay] = useState(tabs[0].type);
   return (
-    <div className="bg-slate-700 p-8 rounded-lg">
-      <h2 className="text-xl font-bold mb-4">Weekly Sales</h2>
+    <div className="dark:bg-slate-700 bg-slate-50 p-8 rounded-lg shadow-xl">
+      <h2 className="text-xl font-bold mb-4 dark:text-slate-50 text-slate-800">
+        Weekly Sales
+      </h2>
       <div className="p-4">
         {/* Tabs */}
         <div className="text-sm font-medium text-center text-gray-200 border-b border-gray-400 dark:text-gray-400 dark:border-gray-700">
@@ -85,10 +91,12 @@ export default function WeeklySalesChart() {
                   <button
                     className={
                       chartTobDisplay == tab.type
-                        ? "active inline-block p-4 text-orange-600 border-b-2 border-transparent border-orange-600 rounded-t-lg dark:text-orange-500 dark:border-orange-500"
-                        : "inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-100 hover:border-gray-300 dark:hover:text-gray-300"
+                        ? "active inline-block p-4 text-orange-600 border-b-2 border-orange-600 rounded-t-lg dark:text-orange-500 dark:border-orange-500"
+                        : "inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-700 text-slate-800 hover:border-gray-100 dark:hover:text-gray-100"
                     }
-                    onClick={() => {setChartTobDisplay(tab.type)}}
+                    onClick={() => {
+                      setChartTobDisplay(tab.type);
+                    }}
                   >
                     {tab.title}
                   </button>
@@ -97,22 +105,25 @@ export default function WeeklySalesChart() {
             })}
           </ul>
         </div>
-        
+
         {/* Content to display  */}
         <div>
-          {
-            tabs.map((tab, i) => {
-              if (chartTobDisplay === tab.type) {
-                return (
-                  <div key={i} className="mt-4">
-                    <h2 >{tab.title}</h2>
-                    <Line options={options} data={tab.data} />
-                  </div>
-                )
-              }
-              return null
-            })
-          }
+          {tabs.map((tab, i) => {
+            if (chartTobDisplay === tab.type) {
+              return (
+                <div key={i} className="mt-4">
+                  <h2>{tab.title}</h2>
+                  <Line
+                    options={options}
+                    data={tab.data}
+                    width={400}
+                    height={200}
+                  />
+                </div>
+              );
+            }
+            return null;
+          })}
         </div>
       </div>
     </div>
