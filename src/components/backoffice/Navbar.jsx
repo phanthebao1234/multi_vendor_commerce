@@ -18,16 +18,23 @@ import {
   DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
 import ThemeSwitcherBtn from '@/components/ui/ThemeSwitcherBtn'
+import Link from "next/link";
 
 export default function Navbar({setShowSidebar, showSidebar}) {
   return (
-    <div className="flex justify-between shadow-xl items-center bg-white dark:bg-slate-800 text-slate-50 h-16 px-8 py-4 fixed top-0 w-full pr-[20rem]">
+    <div className="flex items-center justify-between shadow-xl bg-white dark:bg-slate-800 text-slate-50 h-20 px-8 py-8 fixed top-0 w-full z-50 sm:pr-[20rem]">
+      <Link 
+        href={"/dashboard"} 
+        className="sm:hidden"
+      >
+        Limi
+        </Link>
       {/* Icon */}
       <button onClick={()=> setShowSidebar(!showSidebar)} className="text-lime-700 dark:text-lime-500">
         <AlignJustify />
       </button>
       {/* 3 Icons */}
-      <div className="flex space-x-3 gap-3">
+      <div className="flex space-x-3">
         <ThemeSwitcherBtn />
 
         <DropdownMenu>

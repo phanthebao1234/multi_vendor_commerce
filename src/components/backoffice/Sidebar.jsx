@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/collapsible";
 import { useState } from "react";
 
-export default function Sidebar({ showSidebar }) {
+export default function Sidebar({ showSidebar, setShowSidebar }) {
   const [openMenu, setOpenMenu] = useState(false);
   const pathName = usePathname();
   const sidebarLinks = [
@@ -106,15 +106,16 @@ export default function Sidebar({ showSidebar }) {
     <div
       className={
         showSidebar
-          ? `sm:block dark:bg-slate-700 bg-slate-50 space-y-6 w-64 h-screen dark:text-slate-50 text-slate-800 shadow-xl fixed top-0 left-0`
-          : `hidden sm:block dark:bg-slate-700 bg-slate-50 space-y-6 w-64 h-screen dark:text-slate-50 text-slate-800 shadow-xl fixed top-0 left-0`
+          ? "mt-20 sm:mt-0 sm:block dark:bg-slate-700 bg-slate-50 space-y-6 w-64 h-screen dark:text-slate-50 text-slate-800 shadow-xl fixed top-0 left-0"
+          : "mt-20 sm:mt-0 !hidden sm:block dark:bg-slate-700 bg-slate-50 space-y-6 w-64 h-screen dark:text-slate-50 text-slate-800 shadow-xl fixed top-0 left-0"
       }
     >
-      <Link className="px-6 py-4 " href="">
+      <Link className="px-6 py-4 " href="/dashboard">
         <Image src={logo} alt="logo" className="w-36 h-36" />
       </Link>
-      <div className="space-y-3 flex flex-col mt-14">
+      <div className="space-y-3 flex flex-col">
         <Link
+          onClick={() => setShowSidebar(false)}
           href="/dashboard"
           className={
             pathName == "/dashboard"
@@ -140,6 +141,7 @@ export default function Sidebar({ showSidebar }) {
               const Icon = item.icon;
               return (
                 <Link
+                  onClick={() => setShowSidebar(false)}
                   key={i}
                   href={item.href}
                   className={
@@ -160,11 +162,12 @@ export default function Sidebar({ showSidebar }) {
           const Icon = item.icon;
           return (
             <Link
+              onClick={() => setShowSidebar(false)}
               key={i}
               href={item.href}
               className={
                 item.href == pathName
-                  ? `flex items-center space-x-3 py-2 px-6 border-l-8 border-green-600`
+                  ? `flex items-center space-x-3 py-2 px-6 border-l-8 border-green-600 text-green-600 `
                   : `flex items-center space-x-3 py-2 px-6`
               }
             >
