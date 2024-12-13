@@ -5,8 +5,10 @@ import Image from "next/image";
 import {
   BookUser,
   Boxes,
+  Building2,
   ChevronDown,
   ChevronRight,
+  CircleDollarSign,
   Globe,
   LayoutGrid,
   LayoutList,
@@ -60,6 +62,16 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
       href: "/dashboard/our-staff",
     },
     {
+      title: "Limi Community",
+      icon: Building2,
+      href: "/dashboard/community",
+    },
+    {
+      title: "Wallet",
+      icon: CircleDollarSign,
+      href: "/dashboard/wallet",
+    },
+    {
       title: "Settings",
       icon: Settings,
       href: "/dashboard/settings",
@@ -72,7 +84,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
     {
       title: "Online Store",
       icon: Store,
-      href: "/dashboard/online-store",
+      href: "/dashboard/store",
     },
   ];
   const catelogueLinks = [
@@ -106,8 +118,8 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
     <div
       className={
         showSidebar
-          ? "mt-20 sm:mt-0 sm:block dark:bg-slate-700 bg-slate-50 space-y-6 w-64 h-screen dark:text-slate-50 text-slate-800 shadow-xl fixed top-0 left-0"
-          : "mt-20 sm:mt-0 !hidden sm:block dark:bg-slate-700 bg-slate-50 space-y-6 w-64 h-screen dark:text-slate-50 text-slate-800 shadow-xl fixed top-0 left-0"
+          ? "mt-20 sm:mt-0 sm:block dark:bg-slate-800 bg-slate-50 space-y-6 w-64 h-screen dark:text-slate-300 text-slate-800 shadow-xl fixed top-0 left-0 overflow-auto"
+          : "mt-20 sm:mt-0 !hidden sm:block dark:bg-slate-800 bg-slate-50 space-y-6 w-64 h-screen dark:text-slate-300 text-slate-800 shadow-xl fixed top-0 left-0 overflow-auto"
       }
     >
       <Link className="px-6 py-4 " href="/dashboard">
@@ -115,7 +127,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
       </Link>
       <div className="space-y-3 flex flex-col">
         <Link
-          onClick={() => setShowSidebar(false)}
+          // onClick={() => setShowSidebar(false)}
           href="/dashboard"
           className={
             pathName == "/dashboard"
@@ -129,11 +141,13 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
         <Collapsible className="px-6 py-2">
           <CollapsibleTrigger onClick={() => setOpenMenu(!openMenu)}>
             <button className="flex items-center space-x-20 py-2 ">
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-3 transition-all duration-300">
                 <Slack />
                 <span>Catelogue</span>
               </div>
-              {openMenu ? <ChevronDown /> : <ChevronRight />}
+              <div className="transition-all duration-300">
+                {openMenu ? <ChevronDown /> : <ChevronRight />}
+              </div>
             </button>
           </CollapsibleTrigger>
           <CollapsibleContent className="px-3 py-3 pl-6 bg-slate-50 dark:bg-slate-800 rounded-lg">
@@ -141,7 +155,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
               const Icon = item.icon;
               return (
                 <Link
-                  onClick={() => setShowSidebar(false)}
+                  // onClick={() => setShowSidebar(false)}
                   key={i}
                   href={item.href}
                   className={
@@ -162,7 +176,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
           const Icon = item.icon;
           return (
             <Link
-              onClick={() => setShowSidebar(false)}
+              // onClick={() => setShowSidebar(false)}
               key={i}
               href={item.href}
               className={

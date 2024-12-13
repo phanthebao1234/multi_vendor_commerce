@@ -15,22 +15,28 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuLabel,
-  DropdownMenuSeparator
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import ThemeSwitcherBtn from '@/components/ui/ThemeSwitcherBtn'
+import ThemeSwitcherBtn from "@/components/ui/ThemeSwitcherBtn";
 import Link from "next/link";
 
-export default function Navbar({setShowSidebar, showSidebar}) {
+export default function Navbar({ setShowSidebar, showSidebar }) {
   return (
-    <div className="flex items-center justify-between shadow-xl bg-white dark:bg-slate-800 text-slate-50 h-20 px-8 py-8 fixed top-0 w-full z-50 sm:pr-[20rem]">
-      <Link 
-        href={"/dashboard"} 
-        className="sm:hidden"
-      >
+    <div
+      className={
+        showSidebar
+          ? "flex items-center justify-between shadow-xl bg-white dark:bg-slate-800 text-slate-50 h-20 px-8 py-8 fixed top-0 w-full z-50 sm:pr-[20rem]"
+          : "flex items-center justify-between shadow-xl bg-white dark:bg-slate-800 text-slate-50 h-20 px-8 py-8 fixed top-0 w-full z-50 sm:pr-[20rem] md:pr-[5rem] lg:pr-[5rem]"
+      }
+    >
+      <Link href={"/dashboard"} className="sm:hidden">
         Limi
-        </Link>
+      </Link>
       {/* Icon */}
-      <button onClick={()=> setShowSidebar(!showSidebar)} className="text-lime-700 dark:text-lime-500">
+      <button
+        onClick={() => setShowSidebar(!showSidebar)}
+        className="text-lime-700 dark:text-lime-500"
+      >
         <AlignJustify />
       </button>
       {/* 3 Icons */}

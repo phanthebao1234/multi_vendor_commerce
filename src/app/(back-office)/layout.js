@@ -3,7 +3,7 @@ import { Sidebar, Navbar } from "@/components/backoffice";
 import { useState } from "react";
 
 export default function Layout({ children }) {
-  const [ showSidebar, setShowSidebar] = useState(false)
+  const [ showSidebar, setShowSidebar] = useState(true)
   return (
     <div className="flex">
       {/* sidebar */}
