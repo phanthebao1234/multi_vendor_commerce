@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/lib/generateSlug.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/lib/generateSlug.js", "src/lib/uploadthing.ts", "src/app/api/uploadthing/core.ts", "src/app/api/uploadthing/route.ts"],
   "exclude": ["node_modules"]
 }
