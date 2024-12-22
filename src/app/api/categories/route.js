@@ -4,12 +4,14 @@ export async function POST(request) {
   try {
     const {
       title,
+      marketIds,
       slug,
       imageUrl,
       description,
     } = await request.json();
     const newCategory = {
       title,
+      marketIds,
       slug,
       imageUrl,
       description,
