@@ -98,11 +98,11 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
       icon: LayoutList,
       href: "/dashboard/categories",
     },
-    {
-      title: "Attributes",
-      icon: SendToBack,
-      href: "/dashboard/attributes",
-    },
+    // {
+    //   title: "Attributes",
+    //   icon: SendToBack,
+    //   href: "/dashboard/attributes",
+    // },
     {
       title: "Coupons",
       icon: ScanSearch,
@@ -159,9 +159,9 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
                   key={i}
                   href={item.href}
                   className={
-                    item.href == pathName
-                      ? `flex items-center space-x-3 py-1 text-green-600 text-xl`
-                      : `flex items-center space-x-3 py-1`
+                    pathName.indexOf(item.href)
+                      ? `flex items-center space-x-3 py-1`
+                      : `flex items-center space-x-3 py-1 text-green-600 text-xl`
                   }
                 >
                   <Icon className="w-4 h-4" />
@@ -180,9 +180,9 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
               key={i}
               href={item.href}
               className={
-                item.href == pathName
-                  ? `flex items-center space-x-3 py-2 px-6 border-l-8 border-green-600 text-green-600 `
-                  : `flex items-center space-x-3 py-2 px-6`
+                pathName.indexOf(item.href)
+                  ? `flex items-center space-x-3 py-2 px-6`
+                  : `flex items-center space-x-3 py-2 px-6 border-l-8 border-green-600 text-green-600`
               }
             >
               <Icon />
