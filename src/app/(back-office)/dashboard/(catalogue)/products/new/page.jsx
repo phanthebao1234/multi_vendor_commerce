@@ -8,6 +8,7 @@ import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextInput from "@/components/FormInputs/TextInput";
 import ImageInput from "@/components/FormInputs/ImageInput";
 import SelectInput from "@/components/FormInputs/SelectInput";
+import ArrayItemInput from "@/components/FormInputs/ArrayItemInput";
 import { useForm } from "react-hook-form";
 import { generateSlug } from "@/lib/generateSlug";
 import { makePostRequest } from "@/lib/apiRequest";
@@ -59,6 +60,11 @@ export default function NewProduct() {
       title: "Farmer 5",
     },
   ];
+   const [tags, setTags] = useState([
+      "Tag 1",
+      "Tag 2",
+      "Tag 3",
+    ]);
   const [loading, setLoading] =
     useState(false);
   const {
@@ -90,10 +96,11 @@ export default function NewProduct() {
     );
     data.slug = slug;
     data.imageUrl = imageUrl;
+    dât.tags = tags;
     console.log(data);
     makePostRequest(
       setLoading,
-      "api/categories",
+      "api/products",
       data,
       "Product",
       reset
@@ -109,13 +116,12 @@ export default function NewProduct() {
         className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3"
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-        <TextInput
-          label="Product Title"
-          name="title"
-          register={register}
-          errors={errors}
-          
-        />
+          <TextInput
+            label="Product Title"
+            name="title"
+            register={register}
+            errors={errors}
+          />
           <TextInput
             label="Product SKU"
             name="sku"
@@ -170,6 +176,7 @@ export default function NewProduct() {
             register={register}
             errors={errors}
           />
+          <ArrayItemInput  setItems={setTags} items={tags} itemTitle={"Tag"}/>
           <ImageInput
             label="Product Image"
             imageUrl={imageUrl}
