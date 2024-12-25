@@ -8,6 +8,7 @@ import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextInput from "@/components/FormInputs/TextInput";
 import ImageInput from "@/components/FormInputs/ImageInput"
 import SelectInput from "@/components/FormInputs/SelectInput"
+import ToggleInput from "@/components/FormInputs/ToggleInput"
 import { useForm } from 'react-hook-form'
 import { generateSlug } from "@/lib/generateSlug";
 import { makePostRequest } from "@/lib/apiRequest"
@@ -37,7 +38,12 @@ export default function NewCategory() {
     },
   ]
   const [loading, setLoading] = useState(false)
-  const {register, reset, handleSubmit, formState:{errors}} = useForm()
+  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({
+    defaultValues: {
+      isActive: true,
+    },
+  })
+  const isActive = watch("isActive")
   async function onSubmit(data) {
     {/*
       -id => auto()
@@ -62,6 +68,13 @@ export default function NewCategory() {
           <SelectInput label="Category Market" name="marketIds" options={markets} multiple={true} register={register} errors={errors} className="w-full"/>
           <TextareaInput label="Description Category" name="description" register={register} errors={errors}/>
           <ImageInput label="Category Image" imageUrl={imageUrl} setImageUrl={setImageUrl} endpoint="imageUploader"/>
+          <ToggleInput
+            label="Publish your Category"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Draft"
+            register={register}
+          />
         </div>
         <SubmitButton isLoading={loading} buttonTitle="Create Category" loadingButtonTitle="Create Category please wait..." />
       </form>
