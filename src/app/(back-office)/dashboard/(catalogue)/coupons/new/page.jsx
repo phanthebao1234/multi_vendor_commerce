@@ -8,11 +8,18 @@ import TextInput from "@/components/FormInputs/TextInput";
 import { useForm } from 'react-hook-form'
 import { generateCouponCode } from "@/lib/generateCouponCode";
 import { makePostRequest } from "@/lib/apiRequest"
+import ToggleInput from "@/components/FormInputs/ToggleInput"
 
 export default function NewCoupon() {
   const [loading, setLoading] = useState(false)
   // const [coupon, setCoupon] = useState("")
-  const {register, reset, handleSubmit, formState:{errors}} = useForm()
+  const {register, reset, handleSubmit, formState:{errors}} = useForm({
+    defaultValues: {
+      isActive: true,
+    },
+  })
+  
+  const isActive = watch("isActive")
   
   async function onSubmit(data) {
     {/*
@@ -34,6 +41,13 @@ export default function NewCoupon() {
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput label="Coupon Title" name="title" register={register} errors={errors}/>
           <TextInput label="Coupon Expiry Date" name="expiryDate" register={register} errors={errors} className="w-full" type="date" />
+          <ToggleInput
+            label="Publish your Coupon"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Draft"
+            register={register}
+          />
         </div>
         <SubmitButton isLoading={loading} buttonTitle="Create Coupon" loadingButtonTitle="Create Coupon please wait..." />
       </form>
