@@ -1,7 +1,24 @@
-export default function page() {
+import {
+    TableActions,
+    PageHeader,
+  } from "@/components/backoffice";
+  
+  export default function Market() {
     return (
-        <div className="flex items-center justify-center flex-col min-h-screen">
-            <h2>Markets</h2>
+      <div>
+        {/* Header */}
+        <PageHeader
+          heading="Markets"
+          linkTitle="Add Market"
+          href="/dashboard/market/new"
+        />
+        {/* Tables Action */}
+        {/* Export || Search || Bulk Delete */}
+        <TableActions />
+        <div className="py-8">
+          <h2>Markets</h2>
         </div>
-    )
-};
+      </div>
+    );
+  }
+  

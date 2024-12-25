@@ -15,10 +15,10 @@ import {
   LogOut,
   MonitorPlay,
   ScanSearch,
-  SendToBack,
   Settings,
   Slack,
   Store,
+  TicketX,
   Truck,
   Users2,
   UserSquare2,
@@ -112,6 +112,11 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
       title: "Store Sliders",
       icon: MonitorPlay,
       href: "/dashboard/sliders",
+    },
+    {
+      title: "Store Banners",
+      icon: TicketX,
+      href: "/dashboard/banners",
     },
   ];
   return (
