@@ -9,6 +9,7 @@ import TextInput from "@/components/FormInputs/TextInput";
 import ImageInput from "@/components/FormInputs/ImageInput";
 import SelectInput from "@/components/FormInputs/SelectInput";
 import ArrayItemInput from "@/components/FormInputs/ArrayItemInput";
+import ToggleInput from "@/components/FormInputs/ToggleInput";
 import { useForm } from "react-hook-form";
 import { generateSlug } from "@/lib/generateSlug";
 import { makePostRequest } from "@/lib/apiRequest";
@@ -60,19 +61,27 @@ export default function NewProduct() {
       title: "Farmer 5",
     },
   ];
-   const [tags, setTags] = useState([
-      "Tag 1",
-      "Tag 2",
-      "Tag 3",
-    ]);
+  const [tags, setTags] = useState([
+    "Tag 1",
+    "Tag 2",
+    "Tag 3",
+  ]);
   const [loading, setLoading] =
     useState(false);
   const {
     register,
     reset,
+    watch,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      isActive: true,
+    },
+  });
+  const isActive = watch("isActive");
+  console.log(isActive);
+  
   async function onSubmit(data) {
     {
       /*
@@ -95,8 +104,8 @@ export default function NewProduct() {
       data.title
     );
     data.slug = slug;
-    data.imageUrl = imageUrl;
-    dât.tags = tags;
+    // data.imageUrl = imageUrl;
+    data.tags = tags;
     console.log(data);
     makePostRequest(
       setLoading,
@@ -170,13 +179,25 @@ export default function NewProduct() {
             errors={errors}
             className="w-full"
           />
+          <ToggleInput
+            label="Publish your Product"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Draft"
+            register={register}
+            
+          />
           <TextareaInput
             label="Description Product"
             name="description"
             register={register}
             errors={errors}
           />
-          <ArrayItemInput  setItems={setTags} items={tags} itemTitle={"Tag"}/>
+          <ArrayItemInput
+            setItems={setTags}
+            items={tags}
+            itemTitle={"Tag"}
+          />
           <ImageInput
             label="Product Image"
             imageUrl={imageUrl}
